@@ -5,14 +5,8 @@ using UnityEngine;
 public class MovingGroundBehavior : MonoBehaviour
 {
     public float speed = 10f;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // This value will be set by the GameManager.
 
-    // Update is called once per frame
     void Update()
     {
         transform.position += Vector3.left * speed * Time.deltaTime;

@@ -9,35 +9,40 @@ public class SpawnerBehaviour : MonoBehaviour
     public List<GameObject> obstacleList = new List<GameObject>();
     public float baseCooldown = .5f;
     public float cooldown = .5f;
-    public float tolerance = .1f;
+    public float allowance = .1f;
     private float timer;
 
-    public UnityEvent OnPickRandomCooldown;
-    
-    // Start is called before the first frame update
+    public UnityEvent SetNewCooldownValue;
+
     void Start()
     {
-        /* Set minCooldown: 2f*(PlayerJumpMomentum / GravityAcceleration) + tolerance */
-        // Get the Player GO, then get the CharacterBehavior component
-        var playerBehaviour = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterBehavior>();
-        // Calcultate minCooldown
-        baseCooldown = 2f* Mathf.Sqrt(2f * playerBehaviour.gravity * playerBehaviour.jumpHeight) / playerBehaviour.gravity + tolerance;
+        // Setting baseCooldown: 2f * (PlayerJumpMomentum / GravityAcceleration) + allowance
+
+        // Get the Player GameObject, then retrieve the CharacterBehavior component
+        var playerBehavior = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterBehavior>();
+        // Calculate baseCooldown
+        baseCooldown = 2f * Mathf.Sqrt(2f * playerBehavior.gravity * playerBehavior.jumpHeight) / playerBehavior.gravity + allowance;
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
+
         if (timer >= cooldown)
         {
-            // Istantiate a random obstacle GO in obstacleList (choosing a random index in the list, from 0 to last index excluded),
-            // than parent to this Go transform
-            Instantiate(obstacleList[Random.Range(0, obstacleList.Count)], transform.position, transform.rotation, movingGround.transform);
+            // Instantiate a random obstacle GameObject from the obstacleList.
+            Instantiate(
+                obstacleList[Random.Range(0, obstacleList.Count)],
+                transform.position, transform.rotation, // Set spawn position and rotation (based on the spawner's position and rotation).
+                movingGround.transform // Parent the instantiated obstacle to the movingGround GameObject's transform.
+            );
 
-            // Reset Timer
+            // Reset the timer
             timer -= cooldown;
 
-            OnPickRandomCooldown.Invoke();
+            // Invoke the SetNewCooldownValue event
+            SetNewCooldownValue.Invoke();
         }
     }
 }

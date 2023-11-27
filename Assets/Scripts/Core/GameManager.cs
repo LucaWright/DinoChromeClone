@@ -10,32 +10,27 @@ public class GameManager : MonoBehaviour
     int score;
     int highScore;
 
+    // References
     public CharacterBehavior player;
     public SpawnerBehaviour spawner;
     public MovingGroundBehavior movingGround;
     public Text scoreText;
 
+    // Game Design
     [Space]
-    [Header("Difficulty vectors")]
+    [Header("Difficulty Vectors")]
+    //
     [Tooltip("Set Dino speed (value) at Score (Time)")]
     public AnimationCurve progressionCurve;
     [Tooltip("Set spawn rates by score")]
-    public SpawnerCooldownController[] spawnerCooldownController;
+    public SpawnerCooldownController[] spawnerCooldownController; // Array
+
+    // Current difficulty level.
     int level = 0;
 
-    public UnityEvent GameOverEvent;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // Events
+    public UnityEvent GameOverEvent;
 
     // Called by TriggerBox in Player GO
     public void AddScore()

@@ -17,5 +17,4 @@ public class SpawnerCooldownController
         new Vector2(1.75f,  .5f),
         new Vector2(2f,     .25f),
     };
-
 }
