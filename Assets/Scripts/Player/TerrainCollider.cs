@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundCheck : MonoBehaviour
+public class TerrainCollider : MonoBehaviour
 {
     public bool OnContactGround;
     // Since this variable is public, the CharacterBehaviour script, which has a reference to this component script, can both read and modify its value.

@@ -6,23 +6,33 @@ public class ObstacleBehaviour : MonoBehaviour
 {
     // This script manages the destruction of obstacles when outside the camera view
     private float deadZone;
+    private float speed;
+    private SpawnerBehaviour spawnerBehavior;
 
-    void Start()
+    private void Update()
     {
-        // Pick the main camera's transform
-        var camTransform = Camera.main.transform;
-        // Sets the dead zone on the opposite side of the screen, based on the spawner's horizontal position relative to the camera.
-        deadZone = camTransform.position.x - (transform.position.x - camTransform.position.x);
+        transform.position += Vector3.left * speed * Time.deltaTime; // Move the obstacle.
+        
+        if (transform.position.x <= deadZone) // Check if the obstacle is outside the camera view.
+        {
+            spawnerBehavior.DestroyObstacle(this);
+        }
     }
 
-    private void FixedUpdate()
+    public void SetDeadZone(float value)
     {
-        // Check if the obstacle is outside the camera view
-        if (transform.position.x <= deadZone)
-        {
-            // Destroy the GameObject.
-            // NOTE: "this" refers to this script component. Destroying "this" destroys the script component, not the GameObject!
-            Destroy(this.gameObject);
-        }
+        deadZone = value;
+    }
+
+    public void SetNewSpeed(float value)
+    {
+        speed = value;
+    }
+
+    public void ObstacleSetup(float newDeadzone, float newSpeed, SpawnerBehaviour spawnerReference)
+    {
+        deadZone = newDeadzone;
+        speed = newSpeed;
+        spawnerBehavior = spawnerReference;
     }
 }

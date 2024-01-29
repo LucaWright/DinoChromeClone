@@ -5,13 +5,11 @@ using UnityEngine.Events;
 
 public class ScoreTriggerBehaviour : MonoBehaviour
 {
-    public UnityEvent OnAddScore;
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            OnAddScore.Invoke();
+            GameManager.instance.AddScore();
         }
     }
 }

@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6759091076983819020}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.766516, y: -3.9453678, z: -0.19910987}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -44,106 +44,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01529e8e544f52d469a5249c207b573b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  spawner: {fileID: 0}
-  movingGround: {fileID: 0}
-  scoreText: {fileID: 0}
-  progressionCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 10
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 5
-      value: 10
-      inSlope: -0
-      outSlope: 0.5
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 15
-      value: 15
-      inSlope: 0.5
-      outSlope: 0.4
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 40
-      value: 25
-      inSlope: 0.4
-      outSlope: 0.2857143
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 75
-      value: 35
-      inSlope: 0.2857143
-      outSlope: 0.4
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 100
-      value: 45
-      inSlope: 0.4
-      outSlope: 0.4
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spawnerCooldownController:
-  - scoreLimit: 10
-    cooldownMultiplyer_Probability:
-    - {x: 1, y: 0}
-    - {x: 1.25, y: 0}
-    - {x: 1.5, y: 0.25}
-    - {x: 1.75, y: 0.5}
-    - {x: 2, y: 0.25}
-  - scoreLimit: 25
-    cooldownMultiplyer_Probability:
-    - {x: 1, y: 0}
-    - {x: 1.25, y: 0.15}
-    - {x: 1.5, y: 0.5}
-    - {x: 1.75, y: 0.25}
-    - {x: 2, y: 0.1}
-  - scoreLimit: 40
-    cooldownMultiplyer_Probability:
-    - {x: 1, y: 0.15}
-    - {x: 1.25, y: 0.25}
-    - {x: 1.5, y: 0.45}
-    - {x: 1.75, y: 0.15}
-    - {x: 2, y: 0}
-  - scoreLimit: 75
-    cooldownMultiplyer_Probability:
-    - {x: 1, y: 0.15}
-    - {x: 1.25, y: 0.5}
-    - {x: 1.5, y: 0.25}
-    - {x: 1.75, y: 0.1}
-    - {x: 2, y: 0}
-  - scoreLimit: 100
-    cooldownMultiplyer_Probability:
-    - {x: 1, y: 0.25}
-    - {x: 1.25, y: 0.5}
-    - {x: 1.5, y: 0.25}
-    - {x: 1.75, y: 0}
-    - {x: 2, y: 0}
+  OnScoreEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SpawnerBehaviour, Assembly-CSharp
+        m_MethodName: UpdateObstaclesBehavior
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: UpdateScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnHighScoreEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: UpdateHighScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   GameOverEvent:
     m_PersistentCalls:
       m_Calls:

@@ -1,81 +1,51 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEditor.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    int score;
-    int highScore;
+    public static GameManager instance;
+    #region 🡹WTF IS THAT? THE SINGLETON PATTERN
+    /* This step is a bit technical. You don't need to understand the code, only the concept.
+     * The "singleton pattern" is a design pattern that ensures that only one instance of a certain class is created,
+     * and provides a global access point to this instance.
+     * You can indeed access the public variables or public methods of the game manager
+     * by writing GameManager.instance, followed by the name of the public variable or method.
+     * The game requires a single game manager, and no more than one can exist.
+     * Unity, by default, assigns a cog icon when a script named GameManager is created.
+     */
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            //DontDestroyOnLoad(this.gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+    #endregion
 
-    // References
-    public CharacterBehavior player;
-    public SpawnerBehaviour spawner;
-    public MovingGroundBehavior movingGround;
-    public Text scoreText;
-
-    // Game Design
-    [Space]
-    [Header("Difficulty Vectors")]
-    //
-    [Tooltip("Set Dino speed (value) at Score (Time)")]
-    public AnimationCurve progressionCurve;
-    [Tooltip("Set spawn rates by score")]
-    public SpawnerCooldownController[] spawnerCooldownController; // Array
-
-    // Current difficulty level.
-    int level = 0;
-
+    public int score { get; private set; } = 0;
+    #region 🡹WTF IS THAT? PUBLIC GET, PRIVATE SET
+    /* "public get" does mean that any class can read the value.
+     * "private set" means that only the class that declares the property (in this case, the Game Manager) can change the value.
+     * For all other classes, this property behaves as a “read-only” variable.
+     */
+    #endregion
 
     // Events
+    public UnityEvent OnScoreEvent;
     public UnityEvent GameOverEvent;
 
-    // Called by TriggerBox in Player GO
-    public void AddScore()
+    public void AddScore() // Who call this? Each methods has its references. Click on the link above to check what class invokes the method.
     {
         score++;
-        scoreText.text = score.ToString();
-        EvaluateSpawnerLevelUp();
-        movingGround.speed = progressionCurve.Evaluate(score);
-    }
-
-    void EvaluateSpawnerLevelUp()
-    {
-        if (score == spawnerCooldownController[level].scoreLimit)
-        {
-            level++;
-            level = Mathf.Clamp(level, 0, spawnerCooldownController.Length - 1);
-
-            // Check if probabilities are = 1
-            float probabilitySum = 0f;
-            for (int i = 0; i < spawnerCooldownController[level].cooldownMultiplyer_Probability.Length; i++)
-            {
-                probabilitySum += spawnerCooldownController[level].cooldownMultiplyer_Probability[1].y;
-            }
-            for (int i = 0; i < spawnerCooldownController[level].cooldownMultiplyer_Probability.Length; i++)
-            {
-                spawnerCooldownController[level].cooldownMultiplyer_Probability[1].y /= probabilitySum;
-            }
-        }
-    }
-
-    public void PickRandomCooldown()
-    {
-        float random = Random.Range(0f, 1f);
-        float cumulativeProbability = 0f;
-
-        for (int i = 0; i < spawnerCooldownController[level].cooldownMultiplyer_Probability.Length; i++)
-        {
-            cumulativeProbability += spawnerCooldownController[level].cooldownMultiplyer_Probability[i].y;
-            if (random < cumulativeProbability)
-            {
-                spawner.cooldown = spawner.baseCooldown * spawnerCooldownController[level].cooldownMultiplyer_Probability[i].x;
-                Debug.Log("Pescato valore all'indice: " + i);
-                return;
-            }         
-        }
+        OnScoreEvent.Invoke();
     }
 
     public void GameOver()
@@ -88,6 +58,6 @@ public class GameManager : MonoBehaviour
     {
         EditorSceneManager.LoadScene(0);
         Time.timeScale = 1f;
-
+        score = 0;
     }
 }

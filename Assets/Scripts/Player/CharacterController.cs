@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-    public bool keyPressed;
-    public bool keyHoldDown;
-    public bool keyReleased;    
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool jumpPressed;
+    public bool jumpHoldDown;
+    public bool jumpReleased;
+    // A boolean variable returns either 'true' or 'false'.
+    // When you declare a bool, its default value is 'false'.
 
-    // Update is called once per frame
     void Update()
     {
-        keyPressed = Input.GetKeyDown(KeyCode.Space);
-        keyHoldDown = Input.GetKey(KeyCode.Space);
-        keyReleased = Input.GetKeyUp(KeyCode.Space);
+        jumpPressed = Input.GetButton("Jump");          // True of False?
+        jumpHoldDown = Input.GetButtonDown("Jump");     // True of False?
+        jumpReleased = Input.GetButtonUp("Jump");       // True of False?
+        // Inputs here above are managed by the (old) input manager.
+        // You can check what keyboard key or gamepad button is bound to "Jump" in Edit > Project Settings > Input Manager > Axes
     }
 }

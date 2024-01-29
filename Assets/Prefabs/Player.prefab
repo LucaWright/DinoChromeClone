@@ -26,15 +26,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 922576231386900186}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5953007564217020650}
+  - {fileID: 9092788805014947128}
   - {fileID: 3764508597012603731}
   - {fileID: 3085776726522438911}
-  - {fileID: 9092788805014947128}
   - {fileID: 658985082435544002}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -81,8 +81,7 @@ MonoBehaviour:
   jumpHeight: 2.5
   rb: {fileID: 4146521242086959300}
   controller: {fileID: 4094544032397674021}
-  groundCheck: {fileID: 4992380000248402281}
-  bodyCollider: {fileID: 6420200691919411971}
+  terrainCollider: {fileID: 4992380000248402281}
   scoreTriggerBox: {fileID: 5579156668727192902}
 --- !u!1 &1586297494518987294
 GameObject:
@@ -96,7 +95,7 @@ GameObject:
   - component: {fileID: 7190025658225568208}
   - component: {fileID: 6420200691919411971}
   m_Layer: 0
-  m_Name: BodyCollider
+  m_Name: ObstacleCollisionDetecter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,36 +160,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1586297494518987294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e20662e7d6df8174b90af776b324d21b, type: 3}
+  m_Script: {fileID: 11500000, guid: 286a9cb8754285643b4cdeaf3021ea86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnGameOverEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: GameOver
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!1 &3513238851473733581
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,7 +175,7 @@ GameObject:
   - component: {fileID: 1327092830878254457}
   - component: {fileID: 4992380000248402281}
   m_Layer: 3
-  m_Name: GroundCheckCollider
+  m_Name: TerrainCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -410,9 +382,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a65a931c278ef24287d5ae8178fc1f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyPressed: 0
-  keyHoldDown: 0
-  keyReleased: 0
+  jumpPressed: 0
+  jumpHoldDown: 0
+  jumpReleased: 0
 --- !u!1 &8352786365959830769
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,18 +475,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edc67b4728d85684598dca653bcd2f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnAddScore:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: AddScore
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

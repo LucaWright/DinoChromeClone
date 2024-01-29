@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6926083102769642336, guid: c44491f17c926c141a60928470e54347, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6926083102769642336, guid: c44491f17c926c141a60928470e54347, type: 3}
       propertyPath: m_LocalScale.y
@@ -62,7 +62,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7088484894444990096, guid: c44491f17c926c141a60928470e54347, type: 3}
       propertyPath: m_Name
-      value: Obstacle_Long
+      value: Obstacle_Long_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708423144911802247, guid: c44491f17c926c141a60928470e54347, type: 3}
+      propertyPath: m_Color.b
+      value: 0.3915094
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708423144911802247, guid: c44491f17c926c141a60928470e54347, type: 3}
+      propertyPath: m_Color.g
+      value: 0.3915094
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708423144911802247, guid: c44491f17c926c141a60928470e54347, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1811118794431041533, guid: c44491f17c926c141a60928470e54347, type: 3}
